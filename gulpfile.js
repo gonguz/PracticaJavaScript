@@ -13,7 +13,8 @@ gulp.task('lint', function () {
       .pipe(eslint.format());
 });
 
-gulp.task('test', ['lint'], function () {
+// gulp.task('test', ['lint'], function () {
+gulp.task('test', function () {
   gulp.src('./spec/**/*')
     .pipe(jasmine({ includeStackTrace: true }));
 });
