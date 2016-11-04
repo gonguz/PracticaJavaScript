@@ -38,13 +38,13 @@ describe('Entities library', function () {
 
   it('includes types for characters, items, weapons and effects.', function () {
     expect(Item).toEqual(jasmine.any(Function));
-    // expect(Character).toEqual(jasmine.any(Function));
-    // expect(Weapon).toEqual(jasmine.any(Function));
-    // expect(Scroll).toEqual(jasmine.any(Function));
-    // expect(Effect).toEqual(jasmine.any(Function));
+    expect(Character).toEqual(jasmine.any(Function));
+    expect(Weapon).toEqual(jasmine.any(Function));
+    expect(Scroll).toEqual(jasmine.any(Function));
+    expect(Effect).toEqual(jasmine.any(Function));
   });
 
-  describe('Effect type', function () {
+  xdescribe('Effect type', function () {
 
     it('allows specify arbitrary feature alterations.', function () {
       var effect = new Effect({
@@ -57,7 +57,7 @@ describe('Entities library', function () {
 
   });
 
-  describe('Character type', function () {
+  xdescribe('Character type', function () {
     var features = {
       initiative: 15,
       defense: 55,
@@ -210,7 +210,7 @@ describe('Entities library', function () {
 
   });
 
-  describe('Item type', function () {
+  xdescribe('Item type', function () {
 
     it('allows to create generic items', function () {
       var item = new Item('testItem', new Effect({ hp: 5 }));
@@ -263,7 +263,7 @@ describe('Entities library', function () {
 
   });
 
-  xdescribe('Built-in entities', function () {
+  describe('Built-in entities', function () {
 
     it('includes characters and weapons.', function () {
       expect(entities.characters).toEqual(jasmine.any(Object));
@@ -271,7 +271,7 @@ describe('Entities library', function () {
       expect(entities.scrolls).toEqual(jasmine.any(Object));
     });
 
-    xdescribe('Characters', function () {
+    describe('Characters', function () {
 
       it('includes a tank.', function () {
         var character = entities.characters.heroTank;
@@ -350,7 +350,7 @@ describe('Entities library', function () {
 
     });
 
-    xdescribe('Weapons', function () {
+    describe('Weapons', function () {
 
       it('includes a sword.', function () {
         var weapon = entities.weapons.sword;
@@ -387,7 +387,7 @@ describe('Entities library', function () {
 
     });
 
-    xdescribe('Scrolls', function () {
+    describe('Scrolls', function () {
 
       it('includes health.', function () {
         var scroll = entities.scrolls.health;

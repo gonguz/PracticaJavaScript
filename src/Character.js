@@ -54,6 +54,7 @@ Object.defineProperty(Character.prototype, 'hp', {
   }
 });
 
+
 Object.defineProperty(Character.prototype, 'defense', {
   get: function () {
     return this._defense;
