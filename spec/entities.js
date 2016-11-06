@@ -210,7 +210,7 @@ describe('Entities library', function () {
 
   });
 
-  xdescribe('Item type', function () {
+  describe('Item type', function () {
 
     it('allows to create generic items', function () {
       var item = new Item('testItem', new Effect({ hp: 5 }));
@@ -220,7 +220,7 @@ describe('Entities library', function () {
 
   });
 
-  xdescribe('Weapon type', function () {
+  describe('Weapon type', function () {
 
     it('is a subtype of Item', function () {
       expect(Weapon.prototype).toEqual(jasmine.any(Item));
@@ -242,7 +242,7 @@ describe('Entities library', function () {
 
   });
 
-  xdescribe('Scroll type', function () {
+  describe('Scroll type', function () {
 
     it('is a subtype of Item', function () {
       expect(Scroll.prototype).toEqual(jasmine.any(Item));

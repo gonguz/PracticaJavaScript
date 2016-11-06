@@ -7,8 +7,9 @@ function Item(name, effect) {
 
 function Weapon(name, damage, extraEffect) {
   Item.call(this,name,extraEffect);
-  extraEffect = extraEffect || new Effect({});
+  this.effect = extraEffect || new Effect({});
   this.damage = damage;
+  this.effect.hp = -damage;
 }
 Weapon.prototype = Object.create(Item.prototype);
 Weapon.prototype.constructor = Weapon;
