@@ -37,8 +37,8 @@ describe('Entities library', function () {
   });
 
   it('includes types for characters, items, weapons and effects.', function () {
-    expect(Character).toEqual(jasmine.any(Function));
     expect(Item).toEqual(jasmine.any(Function));
+    expect(Character).toEqual(jasmine.any(Function));
     expect(Weapon).toEqual(jasmine.any(Function));
     expect(Scroll).toEqual(jasmine.any(Function));
     expect(Effect).toEqual(jasmine.any(Function));
@@ -57,7 +57,7 @@ describe('Entities library', function () {
 
   });
 
-  xdescribe('Character type', function () {
+  describe('Character type', function () {
     var features = {
       initiative: 15,
       defense: 55,
@@ -160,7 +160,7 @@ describe('Entities library', function () {
         });
       });
 
-      it('does not applie an effect if the effect comes from a foe but ' +
+      it('does not applies an effect if the effect comes from a foe but ' +
       'defense roll passed.',
       function () {
         var isAlly = false;
@@ -242,7 +242,7 @@ describe('Entities library', function () {
 
   });
 
-  describe('Scroll type', function () {
+  xdescribe('Scroll type', function () {
 
     it('is a subtype of Item', function () {
       expect(Scroll.prototype).toEqual(jasmine.any(Item));
@@ -255,7 +255,7 @@ describe('Entities library', function () {
       expect(health.effect).toEqual(jasmine.any(Effect));
     });
 
-    xit('can test if a character can pay its cost.', function () {
+    it('can test if a character can pay its cost.', function () {
       var health = new Scroll('health', 5, new Effect({ hp: 5 }));
       expect(health.canBeUsed(10)).toBe(true);
       expect(health.canBeUsed(4)).toBe(false);
@@ -271,7 +271,7 @@ describe('Entities library', function () {
       expect(entities.scrolls).toEqual(jasmine.any(Object));
     });
 
-    xdescribe('Characters', function () {
+    describe('Characters', function () {
 
       it('includes a tank.', function () {
         var character = entities.characters.heroTank;
@@ -350,12 +350,13 @@ describe('Entities library', function () {
 
     });
 
-    xdescribe('Weapons', function () {
+    describe('Weapons', function () {
 
       it('includes a sword.', function () {
         var weapon = entities.weapons.sword;
         expect(weapon).toEqual(jasmine.any(Weapon));
-        expect(weapon.effect).toEqual(jasmine.objectContaining({
+        expect(weapon.effect).toEqual(jasmine.
+          objectContaining({
           hp: -25
         }));
       });
@@ -387,7 +388,7 @@ describe('Entities library', function () {
 
     });
 
-    xdescribe('Scrolls', function () {
+    describe('Scrolls', function () {
 
       it('includes health.', function () {
         var scroll = entities.scrolls.health;
