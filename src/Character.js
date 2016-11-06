@@ -30,10 +30,25 @@ Character.prototype.isDead = function () {
    }
 };
 
+Character.prototype.assignFeatures = function (effect) {
+  var feature;
+  var isApplied;
+  for(feature in effect){
+    this[feature] += effect[feature];
+    isApplied = true;
+  }
+  return isApplied;
+}
+
 Character.prototype.applyEffect = function (effect, isAlly) {
-  // Implementa las reglas de aplicación de efecto para modificar las
-  // características del personaje. Recuerda devolver true o false según
-  // si el efecto se ha aplicado o no.
+  var defenseRoll = dice.d100();
+
+  if(isAlly){
+    return this.assignFeatures(effect);
+  }else if (!isAlly && this.defense < defenseRoll) {
+    return this.assignFeatures(effect);
+  }
+  return false;
 };
 
 Object.defineProperty(Character.prototype, 'mp', {

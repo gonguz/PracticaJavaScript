@@ -57,7 +57,7 @@ describe('Entities library', function () {
 
   });
 
-  xdescribe('Character type', function () {
+  describe('Character type', function () {
     var features = {
       initiative: 15,
       defense: 55,
@@ -119,7 +119,7 @@ describe('Entities library', function () {
       expect(character.isDead()).toBe(true);
     });
 
-    xdescribe('Effect application', function () {
+    describe('Effect application', function () {
 
       var variations;
       var effect;
@@ -160,7 +160,7 @@ describe('Entities library', function () {
         });
       });
 
-      it('does not applie an effect if the effect comes from a foe but ' +
+      it('does not applies an effect if the effect comes from a foe but ' +
       'defense roll passed.',
       function () {
         var isAlly = false;
@@ -355,7 +355,8 @@ describe('Entities library', function () {
       it('includes a sword.', function () {
         var weapon = entities.weapons.sword;
         expect(weapon).toEqual(jasmine.any(Weapon));
-        expect(weapon.effect).toEqual(jasmine.objectContaining({
+        expect(weapon.effect).toEqual(jasmine.
+          objectContaining({
           hp: -25
         }));
       });
