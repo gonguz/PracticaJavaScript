@@ -18,7 +18,14 @@ Options.prototype.get = function (id) {
 };
 
 Options.prototype.select = function (id) {
-  // Haz que se emita un evento cuando seleccionamos una opción.
+
+  var grupo = this.get(id); //utilizamos la funcion get de options para obtener  el id de this.
+
+  if (grupo == undefined){
+    this.emit('choseError', 'option-does-not-exist', id);
+  }else {
+    this.emit('chose', id, grupo);
+  }
 };
 
 module.exports = Options;
