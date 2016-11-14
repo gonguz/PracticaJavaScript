@@ -1,4 +1,4 @@
-xdescribe('Options type', function () {
+describe('Options type', function () {
   'use strict';
 
   var Options = require('../src/Options');
