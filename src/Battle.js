@@ -82,6 +82,9 @@ Battle.prototype._extractCharactersById = function (parties) {
 
   function assignParty(characters, party) {
     // Cambia la party de todos los personajes a la pasada como parámetro.
+    characters.forEach(function(character){
+      character[party] = party;
+    });
   }
 
   function useUniqueName(character) {

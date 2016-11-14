@@ -1,6 +1,6 @@
 'use strict';
 
-xdescribe('Utils module', function () {
+describe('Utils module', function () {
   var utils = require('../src/utils');
 
   it('has a listToMap() to convert from a list to an object choosing the key. ',

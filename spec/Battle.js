@@ -1,6 +1,6 @@
 var mockery = require('mockery');
 
-xdescribe('Battle type', function () {
+describe('Battle type', function () {
   'use strict';
 
   var Battle;
@@ -68,7 +68,7 @@ xdescribe('Battle type', function () {
     battle.stop();
   });
 
-  xdescribe('Battle API', function () {
+  describe('Battle API', function () {
 
     it('is completely defined.', function () {
       expect(battle).toEqual(jasmine.any(EventEmitter));
@@ -78,7 +78,7 @@ xdescribe('Battle type', function () {
 
   });
 
-  xdescribe('Turn list', function () {
+  describe('Turn list', function () {
 
     it('includes all the characters sorted by initiative.', function (done) {
       var sortedByInitiative = ['Fasty', 'Tank', 'Wizz'];
@@ -93,7 +93,7 @@ xdescribe('Battle type', function () {
 
   });
 
-  xdescribe('Start', function () {
+  describe('Start', function () {
 
     it('includes the characters who are going to fight by party.',
     function (done) {
@@ -110,7 +110,7 @@ xdescribe('Battle type', function () {
 
   });
 
-  xdescribe('Turns', function () {
+  describe('Turns', function () {
 
     it('include relevant info.', function (done) {
       battle.on('turn', function (turn) {
