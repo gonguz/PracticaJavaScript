@@ -4,7 +4,6 @@ function TurnList() {}
 
 TurnList.prototype.reset = function (charactersById) {
   this._charactersById = charactersById;
-
   this._turnIndex = -1;
   this.turnNumber = 0;
   this.activeCharacterId = null;
@@ -40,27 +39,29 @@ TurnList.prototype.next = function () {
 };
 
 TurnList.prototype._sortByInitiative = function () {
-var list = [];
-var auxList = [];
+  var list = [];
+  var auxList = [];
 
-  for(var object in this._charactersById){
-    auxList.push({name: object, inititative: this._charactersById[object].inititative})
+  for(var characterName in this._charactersById){
+    auxList.push({
+      name: characterName,
+      initiative: this._charactersById[characterName].initiative
+    });
   }
 
   auxList.sort(function (a, b) {
-
     if(a.initiative < b.initiative){
-      return  1;
-    }
-    if(a.inititative > b.inititative){
+      return 1;
+    }else if(a.initiative > b.initiative){
       return -1;
+    }else{
+      return 0;
     }
-    return 0;
   });
 
-  for(var name in auxList){
-    list.push(auxList[name].name);
-  }
-  return list.reverse();
+  list = auxList.map(function(character){
+    return character.name;
+  });
+  return list;
 };
 module.exports = TurnList;

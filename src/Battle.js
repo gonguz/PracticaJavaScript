@@ -33,7 +33,6 @@ Battle.prototype.setup = function (parties) {
   this._charactersById = this._extractCharactersById(parties);
   this._states = this._resetStates(this._charactersById);
   this._turns.reset(this._charactersById);
-
   this.characters.set(this._charactersById);
   this.options.clear();
 };
@@ -78,19 +77,25 @@ Battle.prototype._extractCharactersById = function (parties) {
     assignParty(members, partyId);
     characters = characters.concat(members);
   });
-  return listToMap(characters, useUniqueName);
+  var res = listToMap(characters, useUniqueName);
+  return res;
 
   function assignParty(characters, party) {
     // Cambia la party de todos los personajes a la pasada como parámetro.
     characters.forEach(function(character){
-      character[party] = party;
+      character.party = party;
     });
   }
 
   function useUniqueName(character) {
-    // Genera nombres únicos de acuerdo a las reglas
-    // de generación de identificadores que encontrarás en
-    // la descripción de la práctica o en la especificación.
+    var name = character.name;
+    if(idCounters[name] === undefined){
+      idCounters[name] = 0;
+    }else{
+      idCounters[name]++;
+      name += ' ' + idCounters[name];
+    }
+    return name;
   }
 };
 

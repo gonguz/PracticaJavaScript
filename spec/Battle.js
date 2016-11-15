@@ -93,7 +93,7 @@ describe('Battle type', function () {
 
   });
 
-  describe('Start', function () {
+  xdescribe('Start', function () {
 
     it('includes the characters who are going to fight by party.',
     function (done) {
@@ -110,7 +110,7 @@ describe('Battle type', function () {
 
   });
 
-  describe('Turns', function () {
+  xdescribe('Turns', function () {
 
     it('include relevant info.', function (done) {
       battle.on('turn', function (turn) {
