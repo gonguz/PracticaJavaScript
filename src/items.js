@@ -31,7 +31,6 @@ Scroll.prototype.canBeUsed = function (mp) {
 
 function Effect(variations) {
   variations = variations || {};
-
   this.initiative = variations.initiative || 0;
   this.defense = variations.defense || 0;
   this.hp = variations.hp || 0;
