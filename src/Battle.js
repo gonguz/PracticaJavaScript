@@ -71,7 +71,6 @@ Battle.prototype._extractGrimoiresByParty = function (parties) {
 Battle.prototype._extractCharactersById = function (parties) {
   var idCounters = {};
   var characters = [];
-  var self = this;
   var partyIds = Object.keys(parties);
   partyIds.forEach(function (partyId) {
     var members = parties[partyId].members;
@@ -151,7 +150,7 @@ Battle.prototype._checkEndOfBattle = function () {
   function getCommonParty(characters) {
     // Devuelve la party que todos los personajes tienen en comÃºn o null en caso
     // de que no haya comÃºn.
-    
+
   }
 };
 
