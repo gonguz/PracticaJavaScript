@@ -33,6 +33,7 @@ Battle.prototype.setup = function (parties) {
   this._charactersById = this._extractCharactersById(parties);
   this._states = this._resetStates(this._charactersById);
   this._turns.reset(this._charactersById);
+
   this.characters.set(this._charactersById);
   this.options.clear();
 };
@@ -77,17 +78,18 @@ Battle.prototype._extractCharactersById = function (parties) {
     assignParty(members, partyId);
     characters = characters.concat(members);
   });
-  var res = listToMap(characters, useUniqueName);
-  return res;
+  return listToMap(characters, useUniqueName);
 
   function assignParty(characters, party) {
-    // Cambia la party de todos los personajes a la pasada como parámetro.
     characters.forEach(function(character){
       character.party = party;
     });
   }
 
   function useUniqueName(character) {
+    // Genera nombres únicos de acuerdo a las reglas
+    // de generación de identificadores que encontrarás en
+    // la descripción de la práctica o en la especificación.
     var name = character.name;
     if(idCounters[name] === undefined){
       idCounters[name] = 0;
@@ -97,9 +99,8 @@ Battle.prototype._extractCharactersById = function (parties) {
       name += ' ' + idCounters[name];
     }
     return name;
-  }
-
-};
+    }
+  };
 
 Battle.prototype._resetStates = function (charactersById) {
   return Object.keys(charactersById).reduce(function (map, charId) {
@@ -142,14 +143,26 @@ Battle.prototype._checkEndOfBattle = function () {
   return commonParty ? { winner: commonParty } : null;
 
   function isAlive(character) {
-    // Devuelve true si el personaje está vivo.
     return !character.isDead();
-
   }
 
   function getCommonParty(characters) {
-    // Devuelve la party que todos los personajes tienen en comÃºn o null en caso
-    // de que no haya comÃºn.
+    // Devuelve la party que todos los personajes tienen en común o null en caso
+    // de que no haya común.
+    var partyInitial = characters[0].party;
+    var same = true;
+    var i = 1;
+
+    while(same && i < characters.length){
+      same = characters[i].party !== partyInitial;
+      i++;
+    }
+
+    if(same){
+      return partyInitial
+    }else{
+      return null;
+    }
 
   }
 };
@@ -168,6 +181,13 @@ Battle.prototype._onAction = function (action) {
     action: action,
     activeCharacterId: this._turns.activeCharacterId
   };
+
+  if(action === 'defend')
+    this._defend();
+  else if( action === 'attack')
+    this._attack();
+  else if(action === 'cast')
+    this._cast();
   // Debe llamar al método para la acción correspondiente:
   // defend -> _defend; attack -> _attack; cast -> _cast
 };
@@ -177,11 +197,15 @@ Battle.prototype._defend = function () {
   var newDefense = this._improveDefense(activeCharacterId);
   this._action.targetId = this._action.activeCharacterId;
   this._action.newDefense = newDefense;
+
   this._executeAction();
 };
 
 Battle.prototype._improveDefense = function (targetId) {
-  var states = this._states[targetId];
+  var targetCharacter = this._charactersById[targetId];
+  var improvedDefense = Math.ceil(targetCharacter.defense * 1.1);
+  targetCharacter.defense = improvedDefense;
+  return improvedDefense;
   // Implementa la mejora de la defensa del personaje.
 };
 
@@ -189,11 +213,13 @@ Battle.prototype._restoreDefense = function (targetId) {
   // Restaura la defensa del personaje a cómo estaba antes de mejorarla.
   // Puedes utilizar el atributo this._states[targetId] para llevar tracking
   // de las defensas originales.
+  this._charactersById[targetId]._defense = this._charactersById[targetId]._defense / 1.1;
 };
 
 Battle.prototype._attack = function () {
   var self = this;
   self._showTargets(function onTarget(targetId) {
+    self._action.targetId = targetId;
     // Implementa lo que pasa cuando se ha seleccionado el objetivo.
     self._executeAction();
     self._restoreDefense(targetId);
@@ -212,11 +238,10 @@ Battle.prototype._executeAction = function () {
   var effect = this._action.effect || new Effect({});
   var activeCharacter = this._charactersById[action.activeCharacterId];
   var targetCharacter = this._charactersById[action.targetId];
-  var areAllies = activeCharacter.party === targetCharacter.party;
+  var allies = activeCharacter.party === targetCharacter.party;
+  var successful = targetCharacter.applyEffect(effect, allies);
 
-  var wasSuccessful = targetCharacter.applyEffect(effect, areAllies);
-  this._action.success = wasSuccessful;
-
+  this._action.success = successful;
   this._informAction();
   this._nextTurn();
 };
@@ -229,6 +254,13 @@ Battle.prototype._showTargets = function (onSelection) {
   // Toma ejemplo de la función ._showActions() para mostrar los identificadores
   // de los objetivos.
 
+  var targets = {};
+  for(var name in this._charactersById){
+    if(!this._charactersById[name].isDead()){
+      targets[name] = name;
+    }
+  }
+  this.options.current = targets;
   this.options.current.on('chose', onSelection);
 };
 

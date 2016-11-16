@@ -153,7 +153,7 @@ describe('Battle type', function () {
 
   });
 
-  xdescribe('Battle actions', function () {
+  describe('Battle actions', function () {
 
     it('are 3: attack, defend and cast.', function () {
       battle.on('turn', function () {
@@ -167,7 +167,7 @@ describe('Battle type', function () {
       battle.start();
     });
 
-    xdescribe('Defend action', function () {
+    describe('Defend action', function () {
 
       it('informs of the result.', function (done) {
         var currentDefense = fastEnemy.defense;
@@ -197,9 +197,11 @@ describe('Battle type', function () {
         battle.on('turn', function (turn) {
           switch (turn.number) {
           case 1:
+
             this.options.select('defend');
             break;
           case 2:
+
             expect(fastEnemy.defense).toEqual(expectedDefense);
             done();
             break;

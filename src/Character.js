@@ -34,8 +34,10 @@ Character.prototype.assignFeatures = function (effect) {
   var feature;
   var isApplied;
   for(feature in effect){
+    if(effect !== undefined){
     this[feature] += effect[feature];
     isApplied = true;
+    }
   }
   return isApplied;
 }

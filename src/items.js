@@ -30,12 +30,14 @@ Scroll.prototype.canBeUsed = function (mp) {
 };
 
 function Effect(variations) {
-  this.initiative = variations.initiative;
-  this.defense = variations.defense;
-  this.hp = variations.hp;
-  this.maxHp = variations.maxHp;
-  this.mp = variations.mp;
-  this.maxMp = variations.maxMp;
+  variations = variations || {};
+
+  this.initiative = variations.initiative || 0;
+  this.defense = variations.defense || 0;
+  this.hp = variations.hp || 0;
+  this.maxHp = variations.maxHp || 0;
+  this.mp = variations.mp || 0;
+  this.maxMp = variations.maxMp || 0;
 }
 
 module.exports = {
