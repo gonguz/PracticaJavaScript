@@ -71,6 +71,7 @@ Battle.prototype._extractGrimoiresByParty = function (parties) {
 Battle.prototype._extractCharactersById = function (parties) {
   var idCounters = {};
   var characters = [];
+  var self = this;
   var partyIds = Object.keys(parties);
   partyIds.forEach(function (partyId) {
     var members = parties[partyId].members;
@@ -91,12 +92,14 @@ Battle.prototype._extractCharactersById = function (parties) {
     var name = character.name;
     if(idCounters[name] === undefined){
       idCounters[name] = 0;
+      idCounters[name]++;
     }else{
       idCounters[name]++;
       name += ' ' + idCounters[name];
     }
     return name;
   }
+
 };
 
 Battle.prototype._resetStates = function (charactersById) {
@@ -141,11 +144,14 @@ Battle.prototype._checkEndOfBattle = function () {
 
   function isAlive(character) {
     // Devuelve true si el personaje está vivo.
+    return !character.isDead();
+
   }
 
   function getCommonParty(characters) {
-    // Devuelve la party que todos los personajes tienen en común o null en caso
-    // de que no haya común.
+    // Devuelve la party que todos los personajes tienen en comÃºn o null en caso
+    // de que no haya comÃºn.
+    
   }
 };
 
