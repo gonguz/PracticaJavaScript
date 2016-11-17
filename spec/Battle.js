@@ -290,7 +290,7 @@ describe('Battle type', function () {
 
     });
 
-    xdescribe('Attack action', function () {
+    describe('Attack action', function () {
 
       it('requires to choose a target character.', function (done) {
         battle.on('turn', function () {
@@ -478,7 +478,7 @@ describe('Battle type', function () {
 
     });
 
-    xdescribe('Acting on a target with improved defense', function () {
+    describe('Acting on a target with improved defense', function () {
 
       it('(attack) makes the target\'s defense to be restored.',
          function (done) {
@@ -538,7 +538,7 @@ describe('Battle type', function () {
 
     });
 
-    xdescribe('Cast action', function () {
+    describe('Cast action', function () {
 
       it('requires to choose an scroll.', function (done) {
         battle.on('turn', function () {
@@ -798,7 +798,7 @@ describe('Battle type', function () {
 
   });
 
-  xdescribe('Some battles', function () {
+  describe('Some battles', function () {
 
     it('are won by heroes.', function (done) {
       heroTank.defense = 0;

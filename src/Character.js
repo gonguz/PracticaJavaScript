@@ -32,25 +32,20 @@ Character.prototype.isDead = function () {
 
 Character.prototype.assignFeatures = function (effect) {
   var feature;
-  var isApplied;
   for(feature in effect){
-    if(effect !== undefined){
     this[feature] += effect[feature];
-    isApplied = true;
-    }
   }
-  return isApplied;
 }
 
 Character.prototype.applyEffect = function (effect, isAlly) {
-  var defenseRoll = dice.d100();
-
-  if(isAlly){
-    return this.assignFeatures(effect);
-  }else if (!isAlly && this.defense < defenseRoll) {
-    return this.assignFeatures(effect);
+  var rollDefense = dice.d100();
+  if (!isAlly){
+    if (this.defense >= rollDefense){
+      return false
+    }
   }
-  return false;
+  this.assignFeatures(effect);
+  return true;
 };
 
 Object.defineProperty(Character.prototype, 'mp', {
