@@ -235,11 +235,10 @@ Battle.prototype._attack = function () {
 Battle.prototype._cast = function () {
   var self = this;
   self._showScrolls(function onScroll(scrollId, scroll) {
-    // Implementa lo que pasa cuando se ha seleccionado el hechizo.
     var aux = self._charactersById[self._turns.activeCharacterId].party;
     scroll = self._grimoires[aux][scrollId];
     self._charactersById[self._turns.activeCharacterId].mp -= scroll.cost;
-
+    
     self._showTargets(function onTarget(targetId){
       self._action.targetId = targetId;
       self._action.effect = scroll.effect
